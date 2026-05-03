@@ -13,7 +13,7 @@ interface Props {
 const { slug, title_ko, title_en, year, type, runtime_min, thumbnail, excerpt } = Astro.props;
 ---
 
-<a href={`/works/${slug}`} class="work-card">
+<a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/works/${slug}`} class="work-card">
   <div class="work-card__image">
     <img src={thumbnail} alt={title_ko} loading="lazy" />
   </div>

@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { filmography } from '../data/filmography';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="Filmography" description="고한벌 감독 필모그래피 전체 목록">
@@ -22,7 +24,7 @@ import { filmography } from '../data/filmography';
             <td class="col-year">{year}</td>
             <td class="col-title">
               {slug
-                ? <a href={`/works/${slug}`}>{title_ko}</a>
+                ? <a href={`${base}/works/${slug}`}>{title_ko}</a>
                 : <span>{title_ko}</span>
               }
               {title_en && <span class="title-en">{title_en}</span>}

@@ -21,6 +21,8 @@ const {
   thumbnail, gallery, credits, awards, cast,
 } = entry.data;
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const info = [
   { label: '연도', value: String(year) },
   { label: '유형', value: type },
@@ -37,7 +39,7 @@ const info = [
     </div>
 
     <div class="container">
-      <p class="page-title"><a href="/works">Works</a></p>
+      <p class="page-title"><a href={`${base}/works`}>Works</a></p>
 
       <header class="work-detail__header">
         <h1 class="work-detail__title-ko">{title_ko}</h1>

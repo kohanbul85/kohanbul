@@ -23,6 +23,8 @@ function getExcerpt(body: string | undefined): string {
   const clean = body.replace(/^#+\s.+$/gm, '').replace(/\n+/g, ' ').trim();
   return clean.length > 100 ? clean.slice(0, 100) + '…' : clean;
 }
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <BaseLayout title="KO HANBUL">
@@ -36,7 +38,7 @@ function getExcerpt(body: string | undefined): string {
         <div class="hero__bio">
           <BioContent />
         </div>
-        <a href="/about" class="hero__link">About →</a>
+        <a href={`${base}/about`} class="hero__link">About →</a>
       </div>
       <div class="hero__profile">
         <img
@@ -66,7 +68,7 @@ function getExcerpt(body: string | undefined): string {
         ))}
       </div>
       <div class="section__more">
-        <a href="/works">모든 작품 보기 →</a>
+        <a href={`${base}/works`}>모든 작품 보기 →</a>
       </div>
     </div>
   </section>
@@ -83,13 +85,13 @@ function getExcerpt(body: string | undefined): string {
               <span class="home-awards__detail">
                 <span class="home-awards__festival">{festival}</span>
                 <span class="home-awards__award">{award}</span>
-                <a href={`/works/${work_slug}`} class="home-awards__work">{work_title}</a>
+                <a href={`${base}/works/${work_slug}`} class="home-awards__work">{work_title}</a>
               </span>
             </li>
           ))}
         </ul>
         <div class="section__more">
-          <a href="/awards">전체 수상 내역 →</a>
+          <a href={`${base}/awards`}>전체 수상 내역 →</a>
         </div>
       </div>
     </section>

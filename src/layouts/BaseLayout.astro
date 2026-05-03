@@ -12,6 +12,7 @@ const {
 } = Astro.props;
 
 const siteTitle = title === 'KO HANBUL' ? title : `${title} — KO HANBUL`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!DOCTYPE html>
@@ -35,16 +36,16 @@ const siteTitle = title === 'KO HANBUL' ? title : `${title} — KO HANBUL`;
   <body>
     <header>
       <nav>
-        <a href="/" class="site-title">
+        <a href={`${base}/`} class="site-title">
           <span class="name-en">KO HANBUL</span>
           <span class="name-ko">고한벌</span>
         </a>
         <ul class="nav-links">
-          <li><a href="/works">Works</a></li>
-          <li><a href="/filmography">Filmography</a></li>
-          <li><a href="/awards">Awards</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href={`${base}/works`}>Works</a></li>
+          <li><a href={`${base}/filmography`}>Filmography</a></li>
+          <li><a href={`${base}/awards`}>Awards</a></li>
+          <li><a href={`${base}/about`}>About</a></li>
+          <li><a href={`${base}/contact`}>Contact</a></li>
         </ul>
         <button class="nav-toggle" aria-label="메뉴 열기">
           <span></span><span></span><span></span>

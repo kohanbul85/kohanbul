@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://kohanbul.com',
+  site: 'https://jsm000.github.io',
+  base: '/kohanbul',
   integrations: [sitemap()],
   output: 'static',
 });
