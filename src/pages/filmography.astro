@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { filmography } from '../data/filmography';
+---
+
+<BaseLayout title="Filmography" description="고한벌 감독 필모그래피 전체 목록">
+  <div class="container">
+    <p class="page-title">Filmography</p>
+
+    <table class="filmo-table">
+      <thead>
+        <tr>
+          <th class="col-year">연도</th>
+          <th class="col-title">작품</th>
+          <th class="col-role">역할</th>
+          <th class="col-type">유형</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filmography.map(({ year, title_ko, title_en, roles, role_detail, type, slug }) => (
+          <tr>
+            <td class="col-year">{year}</td>
+            <td class="col-title">
+              {slug
+                ? <a href={`/works/${slug}`}>{title_ko}</a>
+                : <span>{title_ko}</span>
+              }
+              {title_en && <span class="title-en">{title_en}</span>}
+            </td>
+            <td class="col-role">
+              {roles.join(', ')}
+              {role_detail && <span class="role-detail">({role_detail})</span>}
+            </td>
+            <td class="col-type">{type || '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</BaseLayout>
+
+<style>
+  .filmo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  thead th {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    text-align: left;
+    padding: 0 0 0.8rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #eee;
+  }
+  tbody tr:hover { background: #f7f5f0; }
+
+  tbody td {
+    padding: 0.9rem 0.5rem 0.9rem 0;
+    vertical-align: top;
+  }
+
+  .col-year {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.85rem;
+    color: #666;
+    white-space: nowrap;
+    padding-right: 1.5rem;
+    width: 4rem;
+  }
+
+  .col-title { padding-right: 2rem; }
+  .col-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .title-en {
+    display: block;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 0.15rem;
+  }
+
+  .col-role { color: #444; padding-right: 2rem; }
+  .role-detail {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 0.3em;
+  }
+
+  .col-type {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.82rem;
+    color: #888;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .col-type { display: none; }
+    .col-year { padding-right: 1rem; }
+  }
+</style>

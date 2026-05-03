@@ -1,0 +1,169 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { filmography } from '../data/filmography';
+
+const [director] = await getCollection('director');
+const { Content: BioContent } = await render(director);
+
+const { name_ko, name_en, birth_year_display, primary_role, profile_image, bio_en } = director.data;
+---
+
+<BaseLayout title="About" description={`영화감독 ${name_ko}에 대하여`}>
+  <div class="container">
+    <p class="page-title">About</p>
+
+    <div class="about-layout">
+      <aside class="about-profile">
+        <img src={profile_image} alt={`${name_ko} 프로필 사진`} />
+        <div class="about-profile__info">
+          <p class="about-profile__name-en">{name_en}</p>
+          <p class="about-profile__name-ko">{name_ko}</p>
+          {birth_year_display && (
+            <p class="about-profile__meta">{birth_year_display}</p>
+          )}
+          {primary_role && (
+            <p class="about-profile__meta">{primary_role}</p>
+          )}
+        </div>
+      </aside>
+
+      <div class="about-content">
+        <section class="about-section">
+          <div class="bio prose">
+            <BioContent />
+          </div>
+          {bio_en && (
+            <div class="bio prose prose--en">
+              <p>{bio_en}</p>
+            </div>
+          )}
+        </section>
+
+        <section class="about-section">
+          <h2 class="section-label">Filmography</h2>
+          <ul class="about-filmo">
+            {filmography.map(({ year, title_ko, roles, slug }) => (
+              <li class="about-filmo__item">
+                <span class="about-filmo__year">{year}</span>
+                <span class="about-filmo__body">
+                  {slug
+                    ? <a href={`/works/${slug.replace(/\.md$/, '')}`}>{title_ko}</a>
+                    : <span>{title_ko}</span>
+                  }
+                  <span class="about-filmo__roles">{roles.join(' · ')}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  /* ── PROFILE ── */
+  .about-profile img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    background: #e8e6e0;
+    margin-bottom: 1rem;
+  }
+  .about-profile__name-en {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+  .about-profile__name-ko {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  .about-profile__meta {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    color: #888;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── CONTENT ── */
+  .about-section { margin-bottom: 3.5rem; }
+
+  .section-label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 1.2rem;
+  }
+
+  .bio { margin-bottom: 1.5rem; }
+  .prose {
+    font-size: 0.97rem;
+    line-height: 1.95;
+    color: #333;
+    max-width: 620px;
+  }
+  .prose--en {
+    font-family: 'Noto Serif', serif;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  .prose :global(p) { margin: 0; }
+
+  /* ── FILMOGRAPHY ── */
+  .about-filmo { list-style: none; }
+  .about-filmo__item {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+  }
+  .about-filmo__item:first-child { border-top: 1px solid #eee; }
+  .about-filmo__year {
+    font-family: 'Noto Serif', serif;
+    color: #888;
+    font-size: 0.82rem;
+    padding-top: 0.1em;
+  }
+  .about-filmo__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .about-filmo__body a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .about-filmo__roles {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    color: #888;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 720px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .about-profile {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .about-profile img { margin-bottom: 0; }
+  }
+</style>

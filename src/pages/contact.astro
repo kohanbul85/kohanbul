@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const [director] = await getCollection('director');
+const { email, sns } = director.data;
+---
+
+<BaseLayout title="Contact" description="고한벌 감독 연락처 및 상영 문의">
+  <div class="container">
+    <p class="page-title">Contact</p>
+
+    <div class="contact-grid">
+      <div class="contact-block">
+        <h2 class="contact-label">이메일 / Email</h2>
+        {email
+          ? <a href={`mailto:${email}`} class="contact-value">{email}</a>
+          : <p class="contact-placeholder">준비 중</p>
+        }
+      </div>
+
+      <div class="contact-block">
+        <h2 class="contact-label">SNS</h2>
+        <ul class="sns-list">
+          <li>
+            <span class="sns-name">Instagram</span>
+            {sns?.instagram
+              ? <a href={`https://instagram.com/${sns.instagram}`} target="_blank" rel="noopener">{sns.instagram}</a>
+              : <span class="contact-placeholder">준비 중</span>
+            }
+          </li>
+          <li>
+            <span class="sns-name">Vimeo</span>
+            {sns?.vimeo
+              ? <a href={`https://vimeo.com/${sns.vimeo}`} target="_blank" rel="noopener">{sns.vimeo}</a>
+              : <span class="contact-placeholder">준비 중</span>
+            }
+          </li>
+          <li>
+            <span class="sns-name">YouTube</span>
+            {sns?.youtube
+              ? <a href={`https://youtube.com/@${sns.youtube}`} target="_blank" rel="noopener">{sns.youtube}</a>
+              : <span class="contact-placeholder">준비 중</span>
+            }
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-block">
+        <h2 class="contact-label">상영 문의</h2>
+        <p class="contact-note">
+          작품 상영, 강연, 협업 관련 문의는 이메일로 연락해 주세요.
+        </p>
+      </div>
+
+      <div class="contact-block">
+        <h2 class="contact-label">배급</h2>
+        <p class="contact-note">
+          《가끔은 여정이 아름답기도 하다》 배급 문의:<br />
+          <strong>(주)시네마달</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.5rem 4rem;
+    max-width: 700px;
+  }
+
+  .contact-label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+  }
+  .contact-value:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .contact-placeholder {
+    font-size: 0.88rem;
+    color: #aaa;
+    font-style: italic;
+  }
+
+  .contact-note {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.7;
+  }
+
+  .sns-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .sns-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    font-size: 0.9rem;
+  }
+  .sns-name {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.75rem;
+    color: #888;
+    width: 5rem;
+    flex-shrink: 0;
+    letter-spacing: 0.03em;
+  }
+  .sns-list a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 600px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

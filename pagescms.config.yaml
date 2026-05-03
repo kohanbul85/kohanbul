@@ -1,0 +1,63 @@
+media:
+  input: public/assets
+  output: /assets
+
+content:
+  - name: director
+    label: Director
+    type: file
+    path: src/content/director/profile.md
+    fields:
+      - { name: name_ko, label: 이름, type: string, required: true }
+      - { name: name_en, label: 영문 표기, type: string }
+      - { name: birth_year_display, label: 출생/연도 표기, type: string }
+      - { name: primary_role, label: 대표 분야, type: string }
+      - { name: profile_image, label: 프로필 사진, type: image }
+      - { name: bio_en, label: 영문 소개문, type: string }
+      - { name: email, label: 이메일, type: string }
+
+  - name: works
+    label: Works
+    type: collection
+    path: src/content/works
+    filename: "{fields.slug}.md"
+    fields:
+      - { name: title_ko, label: 국문 제목, type: string, required: true }
+      - { name: title_en, label: 영문 제목, type: string }
+      - { name: slug, label: URL Slug, type: string, required: true }
+      - { name: year, label: 연도, type: number, required: true }
+      - { name: type, label: 유형, type: string }
+      - { name: country, label: 국가, type: string }
+      - { name: runtime_min, label: 상영시간_분, type: number }
+      - { name: thumbnail, label: 대표 이미지, type: image }
+      - { name: gallery, label: 갤러리, type: image, list: true }
+      - { name: is_featured, label: 홈 노출, type: boolean }
+      - { name: order, label: 정렬 순서, type: number }
+      - { name: draft, label: 비공개, type: boolean }
+      - name: cast
+        label: 출연
+        type: string
+        list: true
+      - name: genre_tags
+        label: 장르 태그
+        type: string
+        list: true
+      - name: credits
+        label: 크레디트
+        type: object
+        list: true
+        fields:
+          - { name: role, label: 역할, type: string }
+          - name: names
+            label: 이름
+            type: string
+            list: true
+      - name: awards
+        label: 수상/상영
+        type: object
+        list: true
+        fields:
+          - { name: year, label: 연도, type: number }
+          - { name: festival, label: 영화제, type: string }
+          - { name: award, label: 수상내역, type: string }
+          - { name: type, label: 유형, type: select, options: [award, screening] }

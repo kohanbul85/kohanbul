@@ -1,0 +1,66 @@
+---
+interface AwardItem {
+  year: number;
+  festival: string;
+  award: string;
+  type?: 'award' | 'screening';
+}
+
+interface Props {
+  awards: AwardItem[];
+}
+
+const { awards } = Astro.props;
+---
+
+{awards.length > 0 && (
+  <ul class="awards">
+    {awards.map(({ year, festival, award }) => (
+      <li class="awards__item">
+        <span class="awards__year">{year}</span>
+        <span class="awards__details">
+          <span class="awards__festival">{festival}</span>
+          <span class="awards__award">{award}</span>
+        </span>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .awards {
+    list-style: none;
+  }
+
+  .awards__item {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e8e6e0;
+  }
+  .awards__item:first-child { border-top: 1px solid #e8e6e0; }
+
+  .awards__year {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.82rem;
+    color: #888;
+    padding-top: 0.1em;
+  }
+
+  .awards__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .awards__festival {
+    font-size: 0.88rem;
+    color: #555;
+  }
+
+  .awards__award {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+</style>

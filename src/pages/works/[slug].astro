@@ -1,0 +1,163 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CreditsTable from '../../components/CreditsTable.astro';
+import AwardsTable from '../../components/AwardsTable.astro';
+import GalleryGrid from '../../components/GalleryGrid.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works', ({ data }) => !data.draft);
+  return works.map((entry) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const {
+  title_ko, title_en, year, type, runtime_min, country,
+  thumbnail, gallery, credits, awards, cast,
+} = entry.data;
+
+const info = [
+  { label: '연도', value: String(year) },
+  { label: '유형', value: type },
+  { label: '국가', value: country },
+  runtime_min ? { label: '상영시간', value: `${runtime_min}분` } : null,
+  cast.length > 0 ? { label: '출연', value: cast.join(', ') } : null,
+].filter(Boolean) as { label: string; value: string }[];
+---
+
+<BaseLayout title={title_ko} ogImage={thumbnail}>
+  <article class="work-detail">
+    <div class="work-detail__hero">
+      <img src={thumbnail} alt={title_ko} />
+    </div>
+
+    <div class="container">
+      <p class="page-title"><a href="/works">Works</a></p>
+
+      <header class="work-detail__header">
+        <h1 class="work-detail__title-ko">{title_ko}</h1>
+        <p class="work-detail__title-en">{title_en}</p>
+        <dl class="work-detail__info">
+          {info.map(({ label, value }) => (
+            <div>
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </header>
+
+      <section class="work-detail__section">
+        <h2 class="section-label">Synopsis</h2>
+        <div class="prose">
+          <Content />
+        </div>
+      </section>
+
+      {credits.length > 0 && (
+        <section class="work-detail__section">
+          <h2 class="section-label">Credits</h2>
+          <CreditsTable credits={credits} />
+        </section>
+      )}
+
+      {awards.length > 0 && (
+        <section class="work-detail__section">
+          <h2 class="section-label">Awards &amp; Screenings</h2>
+          <AwardsTable awards={awards} />
+        </section>
+      )}
+
+      {gallery.length > 1 && (
+        <section class="work-detail__section">
+          <h2 class="section-label">Gallery</h2>
+          <GalleryGrid images={gallery} alt={title_ko} />
+        </section>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .work-detail__hero {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .work-detail__hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+
+  .work-detail__header {
+    margin-bottom: 3.5rem;
+  }
+
+  .work-detail__title-ko {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .work-detail__title-en {
+    font-family: 'Noto Serif', serif;
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 1.8rem;
+  }
+
+  .work-detail__info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 2rem;
+  }
+  .work-detail__info > div {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .work-detail__info dt {
+    color: #888;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+  .work-detail__info dd {
+    font-weight: 400;
+  }
+
+  .work-detail__section {
+    margin-bottom: 3.5rem;
+  }
+
+  .section-label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 1.2rem;
+  }
+
+  .prose {
+    font-size: 1rem;
+    line-height: 1.9;
+    max-width: 680px;
+    color: #333;
+  }
+  .prose :global(h1),
+  .prose :global(h2) {
+    display: none;
+  }
+</style>

@@ -1,0 +1,248 @@
+{
+  "director": {
+    "name_ko": "고한벌",
+    "name_en": "KO HANBUL",
+    "birth_year_display": "1985 ~",
+    "primary_role": "감독",
+    "active_decades": [
+      "2010년대",
+      "2020년대"
+    ],
+    "kmdb_filmography_count": 12,
+    "profile_image": "assets/profile/kohanbul_profile.jpg",
+    "bio_ko": "고한벌은 다큐멘터리를 중심으로 활동하는 영화감독이다. 학교, 가족, 지역, 삶의 여정을 관찰하며 개인의 시간과 공동체의 기억을 섬세하게 기록해왔다. 대표작으로는 《계절이 지나가는 하늘에는》, 《가끔은 여정이 아름답기도 하다》, 《어느날 교실을 나오면서》가 있다.",
+    "bio_en_draft": "Ko Hanbul is a film director primarily working in documentary cinema. His films observe schools, families, local communities, and personal journeys, carefully recording individual time and collective memory. His representative works include In the Sky Where Seasons Pass By, Sometimes, Beauty Lies Along the Journey, and Out of the Classroom.",
+    "contact": {
+      "email": null,
+      "sns": {}
+    }
+  },
+  "works": [
+    {
+      "title_ko": "가끔은 여정이 아름답기도 하다",
+      "title_en": "Sometimes, Beauty Lies Along the Journey",
+      "slug": "sometimes-beauty-lies-along-the-journey",
+      "year": 2025,
+      "type": "다큐멘터리",
+      "country": "대한민국",
+      "runtime_min": 83,
+      "director": "고한벌",
+      "cast": [
+        "정선영",
+        "정호영",
+        "김창연",
+        "정희갑"
+      ],
+      "genre_tags": [
+        "인물",
+        "사회"
+      ],
+      "thumbnail": "assets/work/sometimes-beauty-lies-along-the-journey/sometimes-beauty-lies-along-the-journey-01.jpg",
+      "gallery": [
+        "assets/work/sometimes-beauty-lies-along-the-journey/sometimes-beauty-lies-along-the-journey-01.jpg",
+        "assets/work/sometimes-beauty-lies-along-the-journey/sometimes-beauty-lies-along-the-journey-02.jpg",
+        "assets/work/sometimes-beauty-lies-along-the-journey/sometimes-beauty-lies-along-the-journey-03.jpg",
+        "assets/work/sometimes-beauty-lies-along-the-journey/sometimes-beauty-lies-along-the-journey-04.jpg",
+        "assets/work/sometimes-beauty-lies-along-the-journey/sometimes-beauty-lies-along-the-journey-05.jpg"
+      ],
+      "image_note": "제공 파일 5장",
+      "synopsis": "20여 년 전, 선영은 열여덟 살에 인천에서 추락 사고로 경추를 크게 다쳤다. 선영의 가족은 수술비를 마련하기 위해 인천의 가게와 집을 팔고 아버지의 고향인 청주로 이주했다. 청주에서 아버지는 알코올 중독으로 고통받고, 어머니는 힘든 노동에 시달리며 건강을 잃었고, 선영의 친형은 군대에서 불미스러운 일로 정신질환을 앓게 된다. 선영은 고시 시험에 합격하면, 그동안 가족이 함께 살았던 인천으로 돌아가 그곳에서의 기억과 흔적을 되찾고자 한다.",
+      "credits": {
+        "감독": [
+          "고한벌"
+        ],
+        "출연": [
+          "정선영",
+          "정호영",
+          "김창연",
+          "정희갑"
+        ],
+        "프로듀서": [
+          "김일권"
+        ],
+        "촬영": [
+          "고한벌",
+          "류형석"
+        ],
+        "편집": [
+          "고한벌"
+        ],
+        "음악": [
+          "임미현"
+        ],
+        "배급사": [
+          "(주)시네마달"
+        ]
+      },
+      "awards": [
+        {
+          "year": 2025,
+          "festival": "제17회 DMZ국제다큐멘터리영화제",
+          "award": "특별상-연대상"
+        }
+      ],
+      "is_featured": true
+    },
+    {
+      "title_ko": "계절이 지나가는 하늘에는",
+      "title_en": "In the Sky Where Seasons Pass By",
+      "slug": "in-the-sky-where-seasons-pass-by",
+      "year": 2021,
+      "type": "다큐멘터리",
+      "country": "대한민국",
+      "runtime_min": 104,
+      "director": "고한벌",
+      "thumbnail": "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-01.jpg",
+      "gallery": [
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-01.jpg",
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-02.jpg",
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-03.jpg",
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-04.jpg",
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-05.jpg",
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-06.jpg",
+        "assets/work/in-the-sky-where-seasons-pass-by/in-the-sky-where-seasons-pass-by-07.jpg"
+      ],
+      "image_note": "제공 파일 7장",
+      "synopsis": "월악산 아래 있는 덕산초등학교에는 6년 동안 한 반으로 지낸 15명의 아이들이 있다. 이 아이들은 여느 학교 아이들처럼 수업 시간에 다소곳이 앉아있지만은 않다. 학교를 마치면 냇가에 숨겨진 비밀 장소에 모이기도 하고, 감정 조절도 못 하는 어른이 담임이 되었다며 쑥덕쑥덕 이야기를 나누기도 한다. 교실에 얌전히 앉아있는 아이들을 상상했던 신규교사 윤재는 예상과 다른 아이들의 모습에 당황한다. 아이들의 계절이 지나가는 하늘에는 무엇으로 가득할까.",
+      "credits": {
+        "감독": [
+          "고한벌"
+        ],
+        "프로듀서": [
+          "류형석"
+        ],
+        "촬영": [
+          "고한벌",
+          "김보미",
+          "류형석"
+        ],
+        "편집": [
+          "고한벌"
+        ],
+        "사운드(음향)": [
+          "고한벌"
+        ],
+        "음악": [
+          "임미현"
+        ]
+      },
+      "awards": [
+        {
+          "year": 2022,
+          "festival": "제19회 서울국제환경영화제",
+          "award": "한국환경영화부문 - 관객심사단상"
+        }
+      ],
+      "is_featured": true
+    },
+    {
+      "title_ko": "어느날 교실을 나오면서",
+      "title_en": "Out of the Classroom",
+      "slug": "out-of-the-classroom",
+      "year": 2017,
+      "type": "극영화",
+      "country": "대한민국",
+      "runtime_min": 15,
+      "director": "고한벌",
+      "thumbnail": "assets/work/out-of-the-classroom/out-of-the-classroom-01.jpg",
+      "gallery": [
+        "assets/work/out-of-the-classroom/out-of-the-classroom-01.jpg"
+      ],
+      "image_note": "제공 파일 1장",
+      "synopsis": null,
+      "synopsis_note": "캡처 화면에는 줄거리 영역이 확인되지 않았습니다. 추후 KMDb 원문, 감독 제공 자료, 영화제 소개글 등으로 보완해야 합니다.",
+      "credits": {
+        "감독": [
+          "고한벌"
+        ]
+      },
+      "is_featured": true
+    }
+  ],
+  "filmography": [
+    {
+      "year": 2025,
+      "title": "가끔은 여정이 아름답기도 하다",
+      "roles": [
+        "감독",
+        "촬영",
+        "편집"
+      ],
+      "note": "다큐멘터리"
+    },
+    {
+      "year": 2024,
+      "title": "불꽃의 기억",
+      "roles": [
+        "촬영"
+      ],
+      "note": "확인 필요"
+    },
+    {
+      "year": 2021,
+      "title": "계절이 지나가는 하늘에는",
+      "roles": [
+        "감독",
+        "촬영",
+        "편집",
+        "사운드(음향)"
+      ],
+      "note": "다큐멘터리"
+    },
+    {
+      "year": 2021,
+      "title": "코리도라스",
+      "roles": [
+        "촬영",
+        "조감독"
+      ],
+      "note": "확인 필요"
+    },
+    {
+      "year": 2020,
+      "title": "학교 가는 길",
+      "roles": [
+        "촬영팀"
+      ],
+      "role_name": "보조촬영"
+    },
+    {
+      "year": 2017,
+      "title": "어느날 교실을 나오면서",
+      "roles": [
+        "감독"
+      ],
+      "note": "극영화"
+    }
+  ],
+  "awards": [
+    {
+      "year": 2025,
+      "festival": "제17회 DMZ국제다큐멘터리영화제",
+      "category_or_award": "특별상-연대상",
+      "work": "가끔은 여정이 아름답기도 하다"
+    },
+    {
+      "year": 2022,
+      "festival": "제19회 서울국제환경영화제",
+      "category_or_award": "한국환경영화부문 - 관객심사단상",
+      "work": "계절이 지나가는 하늘에는"
+    }
+  ],
+  "site_plan": {
+    "recommended_stack": "Astro 또는 Next.js + GitHub Pages + Pages CMS",
+    "pages": [
+      "HOME",
+      "WORKS",
+      "FILMOGRAPHY",
+      "AWARDS / SCREENINGS",
+      "ABOUT",
+      "CONTACT"
+    ],
+    "priority": [
+      "무료 운영",
+      "DB 없음",
+      "감독이 간단하게 직접 수정 가능"
+    ]
+  }
+}

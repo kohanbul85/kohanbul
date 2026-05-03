@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+
+const works = (await getCollection('works', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+function getExcerpt(body: string | undefined): string {
+  if (!body) return '';
+  const clean = body.replace(/^#+\s.+$/gm, '').replace(/\n+/g, ' ').trim();
+  return clean.length > 100 ? clean.slice(0, 100) + '…' : clean;
+}
+---
+
+<BaseLayout title="Works" description="고한벌 감독 작품 목록">
+  <div class="container">
+    <p class="page-title">Works</p>
+
+    <div class="works-grid">
+      {works.map((work) => (
+        <WorkCard
+          slug={work.id.replace(/\.md$/, '')}
+          title_ko={work.data.title_ko}
+          title_en={work.data.title_en}
+          year={work.data.year}
+          type={work.data.type}
+          runtime_min={work.data.runtime_min}
+          thumbnail={work.data.thumbnail}
+          excerpt={getExcerpt(work.body)}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .works-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  @media (min-width: 720px) {
+    .works-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .works-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

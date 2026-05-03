@@ -1,0 +1,225 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '영화감독 고한벌 공식 사이트. Documentary filmmaker Ko Hanbul.',
+  ogImage,
+} = Astro.props;
+
+const siteTitle = title === 'KO HANBUL' ? title : `${title} — KO HANBUL`;
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{siteTitle}</title>
+    <meta name="description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class="site-title">
+          <span class="name-en">KO HANBUL</span>
+          <span class="name-ko">고한벌</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="/works">Works</a></li>
+          <li><a href="/filmography">Filmography</a></li>
+          <li><a href="/awards">Awards</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="메뉴 열기">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>© {new Date().getFullYear()} Ko Hanbul. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle?.addEventListener('click', () => {
+    links?.classList.toggle('open');
+  });
+</script>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-bg: #fafaf8;
+    --color-text: #111;
+    --color-muted: #666;
+    --color-border: #ddd;
+    --font-serif-ko: 'Noto Serif KR', serif;
+    --font-serif-en: 'Noto Serif', serif;
+    --max-width: 1040px;
+    --gap: 2rem;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-serif-ko);
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main { flex: 1; }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* ── NAV ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.2rem var(--gap);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .site-title {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .site-title:hover { text-decoration: none; }
+  .name-en {
+    font-family: var(--font-serif-en);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .name-ko {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  .nav-links a {
+    font-family: var(--font-serif-en);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    color: var(--color-muted);
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--color-text); text-decoration: none; }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--color-text);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    padding: 2rem var(--gap);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    font-family: var(--font-serif-en);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── LAYOUT UTILITIES ── */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 4rem var(--gap);
+  }
+
+  .page-title {
+    font-family: var(--font-serif-en);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-bottom: 3rem;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      flex-direction: column;
+      gap: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-top: 1px solid var(--color-border); }
+    .nav-links a {
+      display: block;
+      padding: 1rem var(--gap);
+    }
+    .container { padding: 2.5rem 1.25rem; }
+  }
+</style>

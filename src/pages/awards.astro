@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const works = await getCollection('works', ({ data }) => !data.draft);
+
+const allAwards = works
+  .flatMap((w) =>
+    w.data.awards.map((a) => ({
+      ...a,
+      work_title_ko: w.data.title_ko,
+      work_title_en: w.data.title_en,
+      work_slug: w.id.replace(/\.md$/, ''),
+    }))
+  )
+  .sort((a, b) => b.year - a.year);
+---
+
+<BaseLayout title="Awards" description="고한벌 감독 수상 및 상영 내역">
+  <div class="container">
+    <p class="page-title">Awards &amp; Screenings</p>
+
+    {allAwards.length > 0 ? (
+      <ul class="awards-list">
+        {allAwards.map(({ year, festival, award, work_title_ko, work_title_en, work_slug }) => (
+          <li class="awards-list__item">
+            <span class="awards-list__year">{year}</span>
+            <span class="awards-list__body">
+              <span class="awards-list__festival">{festival}</span>
+              <span class="awards-list__award">{award}</span>
+              <a href={`/works/${work_slug}`} class="awards-list__work">
+                {work_title_ko}
+                {work_title_en && <em>{work_title_en}</em>}
+              </a>
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="empty">수상 내역이 없습니다.</p>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .awards-list { list-style: none; }
+
+  .awards-list__item {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    gap: 1.5rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid #e8e6e0;
+  }
+  .awards-list__item:first-child { border-top: 1px solid #e8e6e0; }
+
+  .awards-list__year {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.9rem;
+    color: #888;
+    padding-top: 0.15em;
+  }
+
+  .awards-list__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .awards-list__festival {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .awards-list__award {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .awards-list__work {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+    color: #888;
+    text-decoration: none;
+  }
+  .awards-list__work em {
+    font-style: italic;
+    font-family: 'Noto Serif', serif;
+  }
+  .awards-list__work:hover { color: #333; text-decoration: none; }
+
+  .empty { color: #888; font-size: 0.9rem; }
+</style>
