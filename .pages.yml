@@ -15,6 +15,14 @@ content:
       - { name: profile_image, label: 프로필 사진, type: image }
       - { name: body, label: 국문 소개문, type: rich-text }
       - { name: bio_en, label: 영문 소개문, type: string }
+      - name: education
+        label: 학력
+        type: object
+        list: true
+        fields:
+          - { name: school, label: 학교명, type: string }
+          - { name: department, label: 학과/전공, type: string }
+          - { name: degree, label: 학위/상태, type: string }
       - { name: email, label: 이메일, type: string }
       - name: sns
         label: SNS
@@ -75,6 +83,7 @@ content:
               values:
                 - award
                 - screening
+      - { name: trailer_youtube_id, label: 예고편 YouTube ID, type: string }
       - { name: body, label: Synopsis, type: rich-text }
 
   - name: notes

@@ -32,6 +32,7 @@ const worksCollection = defineCollection({
     cast: z.array(z.string()).default([]),
     genre_tags: z.array(z.string()).default([]),
     synopsis_en: z.string().optional(),
+    trailer_youtube_id: z.string().optional(),
   }),
 });
 
@@ -45,6 +46,11 @@ const directorCollection = defineCollection({
     profile_image: z.string(),
     email: z.string().optional(),
     bio_en: z.string().optional(),
+    education: z.array(z.object({
+      school: z.string(),
+      department: z.string().optional(),
+      degree: z.string().optional(),
+    })).default([]),
     sns: z.object({
       instagram: z.string().optional(),
       vimeo: z.string().optional(),

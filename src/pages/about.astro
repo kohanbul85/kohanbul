@@ -8,7 +8,7 @@ const filmography = (await getCollection('filmography'))
 const [director] = await getCollection('director');
 const { Content: BioContent } = await render(director);
 
-const { name_ko, name_en, birth_year_display, primary_role, profile_image, bio_en } = director.data;
+const { name_ko, name_en, birth_year_display, primary_role, profile_image, bio_en, education } = director.data;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
@@ -29,6 +29,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             <p class="about-profile__meta">{primary_role}</p>
           )}
         </div>
+        {education.length > 0 && (
+          <div class="about-education">
+            {education.map(({ school, department, degree }) => (
+              <div class="about-education__item">
+                <p class="about-education__school">{school}</p>
+                {(department || degree) && (
+                  <p class="about-education__detail">
+                    {department && <span>{department}</span>}
+                    {department && degree && <span> · </span>}
+                    {degree && <span>{degree}</span>}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </aside>
 
       <div class="about-content">
@@ -97,6 +113,30 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     font-size: 0.78rem;
     color: #888;
     letter-spacing: 0.03em;
+  }
+
+  /* ── EDUCATION ── */
+  .about-education {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .about-education__school {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.8rem;
+    color: #444;
+    line-height: 1.4;
+  }
+
+  .about-education__detail {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.72rem;
+    color: #999;
+    margin-top: 0.1rem;
   }
 
   /* ── CONTENT ── */

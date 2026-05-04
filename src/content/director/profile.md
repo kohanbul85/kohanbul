@@ -6,6 +6,15 @@ primary_role: "감독"
 profile_image: "/assets/profile/kohanbul_profile.jpg"
 email: ""
 bio_en: "Ko Hanbul is a film director primarily working in documentary cinema. His films observe schools, families, local communities, and personal journeys, carefully recording individual time and collective memory. His representative works include *In the Sky Where Seasons Pass By*, *Sometimes, Beauty Lies Along the Journey*, and *Out of the Classroom*."
+education:
+  - school: 한국교원대학교
+    department: 초등교육학과
+    degree: 학사 졸업
+  - school: 한국예술종합학교 영상원
+    department: 영화과
+    degree: 석사 졸업
+  - school: 연세대학교 대학원
+    degree: 박사과정 재학 중
 sns:
   instagram: ""
   vimeo: ""
