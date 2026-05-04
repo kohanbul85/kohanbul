@@ -1,0 +1,160 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = (await getCollection('notes'))
+    .sort((a, b) => b.data.date.localeCompare(a.data.date));
+  return notes.map((entry, index) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: {
+      entry,
+      prev: index > 0 ? notes[index - 1] : null,
+      next: index < notes.length - 1 ? notes[index + 1] : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const { title, date, excerpt } = entry.data;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function formatDate(dateStr: string) {
+  const [y, m, d] = dateStr.split('-');
+  return `${y}년 ${m}월 ${d}일`;
+}
+---
+
+<BaseLayout title={title} description={excerpt || title}>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href={`${base}/texts`}>Texts</a>
+      <span>·</span>
+      <span>작업노트</span>
+    </div>
+
+    <article class="article">
+      <header class="article-header">
+        <p class="article-date">{formatDate(date)}</p>
+        <h1 class="article-title">{title}</h1>
+      </header>
+
+      <div class="article-body prose">
+        <Content />
+      </div>
+    </article>
+
+    <nav class="post-nav">
+      {prev
+        ? <a href={`${base}/texts/notes/${prev.id.replace(/\.md$/, '')}`} class="post-nav__item post-nav__prev">
+            <span class="post-nav__label">이전 글</span>
+            <span class="post-nav__title">{prev.data.title}</span>
+          </a>
+        : <span class="post-nav__item post-nav__empty" />
+      }
+      {next
+        ? <a href={`${base}/texts/notes/${next.id.replace(/\.md$/, '')}`} class="post-nav__item post-nav__next">
+            <span class="post-nav__label">다음 글</span>
+            <span class="post-nav__title">{next.data.title}</span>
+          </a>
+        : <span class="post-nav__item post-nav__empty" />
+      }
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-bottom: 3.5rem;
+  }
+  .breadcrumb a { color: #aaa; }
+  .breadcrumb a:hover { color: #333; text-decoration: none; }
+
+  .article { max-width: 660px; }
+
+  .article-header { margin-bottom: 2.5rem; }
+
+  .article-date {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    color: #aaa;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+
+  .article-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #111;
+  }
+
+  .article-body {
+    font-size: 0.97rem;
+    line-height: 2;
+    color: #333;
+  }
+
+  .article-body :global(p) { margin-bottom: 1.5em; }
+
+  .article-body :global(hr) {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 2rem 0;
+  }
+
+  .article-body :global(strong) {
+    font-weight: 600;
+    color: #111;
+  }
+
+  /* ── POST NAV ── */
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    max-width: 660px;
+    margin-top: 4rem;
+    border-top: 1px solid #eee;
+  }
+
+  .post-nav__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.5rem 0;
+    text-decoration: none;
+  }
+
+  .post-nav__next {
+    text-align: right;
+    align-items: flex-end;
+    padding-left: 1.5rem;
+  }
+
+  .post-nav__prev {
+    padding-right: 1.5rem;
+  }
+
+  .post-nav__label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.7rem;
+    color: #aaa;
+    letter-spacing: 0.05em;
+  }
+
+  .post-nav__title {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .post-nav__item:hover .post-nav__title { color: #111; text-decoration: underline; text-underline-offset: 3px; }
+</style>

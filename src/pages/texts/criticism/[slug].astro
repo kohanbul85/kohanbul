@@ -1,0 +1,174 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const criticism = (await getCollection('criticism'))
+    .sort((a, b) => b.data.date.localeCompare(a.data.date));
+  return criticism.map((entry, index) => ({
+    params: { slug: entry.id.replace(/\.md$/, '') },
+    props: {
+      entry,
+      prev: index > 0 ? criticism[index - 1] : null,
+      next: index < criticism.length - 1 ? criticism[index + 1] : null,
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const { title, date, author, source, film, excerpt } = entry.data;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function formatDate(dateStr: string) {
+  const [y, m, d] = dateStr.split('-');
+  return `${y}년 ${m}월 ${d}일`;
+}
+---
+
+<BaseLayout title={title} description={excerpt || title}>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href={`${base}/texts`}>Texts</a>
+      <span>·</span>
+      <span>비평</span>
+    </div>
+
+    <article class="article">
+      <header class="article-header">
+        <p class="article-date">{formatDate(date)}</p>
+        <h1 class="article-title">{title}</h1>
+        <p class="article-byline">
+          {author}
+          {source && <span class="article-source"> · {source}</span>}
+          {film && <span class="article-film"> · 〈{film}〉</span>}
+        </p>
+      </header>
+
+      <div class="article-body prose">
+        <Content />
+      </div>
+    </article>
+
+    <nav class="post-nav">
+      {prev
+        ? <a href={`${base}/texts/criticism/${prev.id.replace(/\.md$/, '')}`} class="post-nav__item post-nav__prev">
+            <span class="post-nav__label">이전 글</span>
+            <span class="post-nav__title">{prev.data.title}</span>
+            <span class="post-nav__author">{prev.data.author}</span>
+          </a>
+        : <span class="post-nav__item post-nav__empty" />
+      }
+      {next
+        ? <a href={`${base}/texts/criticism/${next.id.replace(/\.md$/, '')}`} class="post-nav__item post-nav__next">
+            <span class="post-nav__label">다음 글</span>
+            <span class="post-nav__title">{next.data.title}</span>
+            <span class="post-nav__author">{next.data.author}</span>
+          </a>
+        : <span class="post-nav__item post-nav__empty" />
+      }
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    gap: 0.5rem;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-bottom: 3.5rem;
+  }
+  .breadcrumb a { color: #aaa; }
+  .breadcrumb a:hover { color: #333; text-decoration: none; }
+
+  .article { max-width: 660px; }
+
+  .article-header { margin-bottom: 2.5rem; }
+
+  .article-date {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    color: #aaa;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+
+  .article-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #111;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-byline {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.82rem;
+    color: #888;
+  }
+
+  .article-source { color: #aaa; }
+  .article-film { color: #aaa; }
+
+  .article-body {
+    font-size: 0.97rem;
+    line-height: 2;
+    color: #333;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+  }
+
+  .article-body :global(p) { margin-bottom: 1.5em; }
+
+  /* ── POST NAV ── */
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    max-width: 660px;
+    margin-top: 4rem;
+    border-top: 1px solid #eee;
+  }
+
+  .post-nav__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.5rem 0;
+    text-decoration: none;
+  }
+
+  .post-nav__next {
+    text-align: right;
+    align-items: flex-end;
+    padding-left: 1.5rem;
+  }
+
+  .post-nav__prev {
+    padding-right: 1.5rem;
+  }
+
+  .post-nav__label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.7rem;
+    color: #aaa;
+    letter-spacing: 0.05em;
+  }
+
+  .post-nav__title {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .post-nav__author {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.75rem;
+    color: #bbb;
+  }
+
+  .post-nav__item:hover .post-nav__title { color: #111; text-decoration: underline; text-underline-offset: 3px; }
+</style>

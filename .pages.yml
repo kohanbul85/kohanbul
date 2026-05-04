@@ -77,6 +77,31 @@ content:
                 - screening
       - { name: body, label: Synopsis, type: rich-text }
 
+  - name: notes
+    label: 작업노트
+    type: collection
+    path: src/content/notes
+    filename: "{fields.date}-{fields.title}.md"
+    fields:
+      - { name: title, label: 제목, type: string, required: true }
+      - { name: date, label: 날짜, type: string, required: true }
+      - { name: excerpt, label: 요약, type: string }
+      - { name: body, label: 본문, type: rich-text }
+
+  - name: criticism
+    label: 비평
+    type: collection
+    path: src/content/criticism
+    filename: "{fields.date}-{fields.title}.md"
+    fields:
+      - { name: title, label: 제목, type: string, required: true }
+      - { name: author, label: 필자, type: string, required: true }
+      - { name: source, label: 출처, type: string }
+      - { name: date, label: 날짜, type: string, required: true }
+      - { name: film, label: 관련 작품, type: string }
+      - { name: excerpt, label: 요약, type: string }
+      - { name: body, label: 본문, type: rich-text }
+
   - name: filmography
     label: Filmography
     type: collection

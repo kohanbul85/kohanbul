@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const notes = (await getCollection('notes'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const criticism = (await getCollection('criticism'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function formatDate(dateStr: string) {
+  const [y, m, d] = dateStr.split('-');
+  return `${y}.${m}.${d}`;
+}
+---
+
+<BaseLayout title="Texts" description="고한벌 작업노트 및 영화 비평">
+  <div class="container">
+    <p class="page-title">Texts</p>
+
+    <div class="texts-grid">
+      <section class="texts-section">
+        <div class="section-header">
+          <h2 class="section-label">작업노트</h2>
+        </div>
+        <ul class="texts-list">
+          {notes.map(({ id, data: { title, date } }) => (
+            <li class="texts-item">
+              <span class="texts-date">{formatDate(date)}</span>
+              <a href={`${base}/texts/notes/${id.replace(/\.md$/, '')}`} class="texts-title">{title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="texts-section">
+        <div class="section-header">
+          <h2 class="section-label">비평</h2>
+        </div>
+        <ul class="texts-list">
+          {criticism.map(({ id, data: { title, date, author } }) => (
+            <li class="texts-item">
+              <span class="texts-date">{formatDate(date)}</span>
+              <a href={`${base}/texts/criticism/${id.replace(/\.md$/, '')}`} class="texts-title">{title}</a>
+              <span class="texts-author">{author}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .texts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.8rem;
+  }
+
+  .section-label {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  .texts-list { list-style: none; }
+
+  .texts-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 0.5rem 1rem;
+    align-items: baseline;
+  }
+
+  .texts-date {
+    font-family: 'Noto Serif', serif;
+    font-size: 0.75rem;
+    color: #aaa;
+    white-space: nowrap;
+  }
+
+  .texts-title {
+    font-size: 0.9rem;
+    color: #222;
+    line-height: 1.5;
+  }
+  .texts-title:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .texts-author {
+    grid-column: 2;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.75rem;
+    color: #999;
+  }
+
+  @media (max-width: 720px) {
+    .texts-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

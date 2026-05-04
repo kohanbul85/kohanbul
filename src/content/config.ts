@@ -67,8 +67,31 @@ const filmographyCollection = defineCollection({
   }),
 });
 
+const notesCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.string(),
+    excerpt: z.string().optional(),
+  }),
+});
+
+const criticismCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    author: z.string(),
+    source: z.string().optional(),
+    date: z.string(),
+    film: z.string().optional(),
+    excerpt: z.string().optional(),
+  }),
+});
+
 export const collections = {
   works: worksCollection,
   director: directorCollection,
   filmography: filmographyCollection,
+  notes: notesCollection,
+  criticism: criticismCollection,
 };
