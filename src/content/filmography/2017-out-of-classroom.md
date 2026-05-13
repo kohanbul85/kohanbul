@@ -6,5 +6,5 @@ roles:
   - 감독
 type: "극영화"
 work_slug: "out-of-the-classroom"
-order: 6
+order: 8
 ---

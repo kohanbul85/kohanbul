@@ -34,7 +34,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="hero__text">
         <h1 class="hero__name-en">KO HANBUL</h1>
         <p class="hero__name-ko">고한벌</p>
-        <p class="hero__role">{director.data.primary_role} / {director.data.birth_year_display}</p>
         <div class="hero__bio">
           <BioContent />
         </div>
@@ -59,11 +58,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             slug={work.id.replace(/\.md$/, '')}
             title_ko={work.data.title_ko}
             title_en={work.data.title_en}
-            year={work.data.year}
-            type={work.data.type}
-            runtime_min={work.data.runtime_min}
             thumbnail={work.data.thumbnail}
-            excerpt={getExcerpt(work.body)}
           />
         ))}
       </div>
@@ -72,30 +67,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </div>
     </div>
   </section>
-
-  <!-- Recent Awards -->
-  {allAwards.length > 0 && (
-    <section class="section section--alt">
-      <div class="container">
-        <p class="page-title">Awards &amp; Screenings</p>
-        <ul class="home-awards">
-          {allAwards.map(({ year, festival, award, work_title, work_slug }) => (
-            <li class="home-awards__item">
-              <span class="home-awards__year">{year}</span>
-              <span class="home-awards__detail">
-                <span class="home-awards__festival">{festival}</span>
-                <span class="home-awards__award">{award}</span>
-                <a href={`${base}/works/${work_slug}`} class="home-awards__work">{work_title}</a>
-              </span>
-            </li>
-          ))}
-        </ul>
-        <div class="section__more">
-          <a href={`${base}/awards`}>전체 수상 내역 →</a>
-        </div>
-      </div>
-    </section>
-  )}
 </BaseLayout>
 
 <style>

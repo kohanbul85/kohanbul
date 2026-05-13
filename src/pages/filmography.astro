@@ -22,23 +22,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         </tr>
       </thead>
       <tbody>
-        {filmography.map(({ data: { year, title_ko, title_en, roles, role_detail, type, work_slug } }) => (
-          <tr>
-            <td class="col-year">{year}</td>
-            <td class="col-title">
-              {work_slug
-                ? <a href={`${base}/works/${work_slug}`}>{title_ko}</a>
-                : <span>{title_ko}</span>
-              }
-              {title_en && <span class="title-en">{title_en}</span>}
-            </td>
-            <td class="col-role">
-              {roles.join(', ')}
-              {role_detail && <span class="role-detail">({role_detail})</span>}
-            </td>
-            <td class="col-type">{type || '—'}</td>
-          </tr>
-        ))}
+        {filmography.map(({ data: { year, title_ko, title_en, roles, role_detail, type, work_slug, link } }) => {
+          const href = work_slug ? `${base}/works/${work_slug}` : (link ?? null);
+          const isExternal = !work_slug && !!link;
+          return (
+            <tr
+              class={href ? 'has-link' : undefined}
+              data-href={href ?? undefined}
+              data-external={isExternal ? 'true' : undefined}
+            >
+              <td class="col-year">{year}</td>
+              <td class="col-title">
+                <span class={`title-ko${href ? ' title-ko--linked' : ''}`}>
+                  {title_ko}
+                  {work_slug && <span class="link-icon" aria-hidden="true">→</span>}
+                  {isExternal && <span class="link-icon" aria-hidden="true">↗</span>}
+                </span>
+                {title_en && <span class="title-en">{title_en}</span>}
+              </td>
+              <td class="col-role">
+                {roles.join(', ')}
+                {role_detail && <span class="role-detail">({role_detail})</span>}
+              </td>
+              <td class="col-type">{type || '—'}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   </div>
@@ -83,7 +92,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 
   .col-title { padding-right: 2rem; }
-  .col-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .title-ko { display: inline-flex; align-items: baseline; gap: 0.3em; }
+
+  .title-ko--linked {
+    text-decoration: underline;
+    text-decoration-color: #ccc;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-color 0.15s;
+  }
+
+  .link-icon {
+    font-size: 0.72rem;
+    color: #aaa;
+    transition: color 0.15s;
+    flex-shrink: 0;
+    font-style: normal;
+    font-family: 'Noto Serif', serif;
+  }
+
+  tr.has-link { cursor: pointer; }
+  tr.has-link:hover .title-ko--linked { text-decoration-color: #333; }
+  tr.has-link:hover .link-icon { color: #333; }
 
   .title-en {
     display: block;
@@ -113,3 +144,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .col-year { padding-right: 1rem; }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLTableRowElement>('tr[data-href]').forEach((row) => {
+    row.addEventListener('click', () => {
+      const href = row.dataset.href!;
+      if (row.dataset.external === 'true') {
+        window.open(href, '_blank', 'noopener,noreferrer');
+      } else {
+        window.location.href = href;
+      }
+    });
+  });
+</script>

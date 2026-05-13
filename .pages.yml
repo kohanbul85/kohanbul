@@ -84,6 +84,8 @@ content:
                 - award
                 - screening
       - { name: trailer_youtube_id, label: 예고편 YouTube ID, type: string }
+      - { name: inquiry_distributor, label: 배급사 상영 문의, type: string }
+      - { name: inquiry_community, label: 공동체 상영 문의, type: string }
       - { name: body, label: Synopsis, type: rich-text }
 
   - name: notes
@@ -127,4 +129,5 @@ content:
       - { name: role_detail, label: 역할 상세, type: string }
       - { name: type, label: 유형, type: string }
       - { name: work_slug, label: 작품 페이지 Slug, type: string }
+      - { name: link, label: 외부 링크, type: string }
       - { name: order, label: 정렬 순서, type: number }

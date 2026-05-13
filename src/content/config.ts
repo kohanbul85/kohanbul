@@ -33,6 +33,8 @@ const worksCollection = defineCollection({
     genre_tags: z.array(z.string()).default([]),
     synopsis_en: z.string().optional(),
     trailer_youtube_id: z.string().optional(),
+    inquiry_distributor: z.string().optional(),
+    inquiry_community: z.string().optional(),
   }),
 });
 
@@ -69,6 +71,7 @@ const filmographyCollection = defineCollection({
     role_detail: z.string().optional(),
     type: z.string().optional().default(''),
     work_slug: z.string().optional().default(''),
+    link: z.string().optional(),
     order: z.number().default(99),
   }),
 });

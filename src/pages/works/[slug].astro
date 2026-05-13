@@ -20,6 +20,7 @@ const { Content } = await render(entry);
 const {
   title_ko, title_en, year, type, runtime_min, country,
   thumbnail, gallery, credits, awards, cast, trailer_youtube_id,
+  inquiry_distributor, inquiry_community,
 } = entry.data;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -89,6 +90,26 @@ const info = [
         <section class="work-detail__section">
           <h2 class="section-label">Gallery</h2>
           <GalleryGrid images={gallery} alt={title_ko} />
+        </section>
+      )}
+
+      {(inquiry_distributor || inquiry_community) && (
+        <section class="work-detail__section">
+          <h2 class="section-label">Screening Inquiry</h2>
+          <dl class="screening-inquiry">
+            {inquiry_distributor && (
+              <div>
+                <dt>배급사 상영 문의</dt>
+                <dd><a href={`mailto:${inquiry_distributor}`}>{inquiry_distributor}</a></dd>
+              </div>
+            )}
+            {inquiry_community && (
+              <div>
+                <dt>공동체 상영 문의</dt>
+                <dd><a href={inquiry_community} target="_blank" rel="noopener noreferrer">{inquiry_community}</a></dd>
+              </div>
+            )}
+          </dl>
         </section>
       )}
     </div>
@@ -174,4 +195,33 @@ const info = [
   }
 
   .trailer-wrap { max-width: 680px; }
+
+  .screening-inquiry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .screening-inquiry > div {
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    align-items: baseline;
+  }
+  .screening-inquiry dt {
+    color: #888;
+    font-family: 'Noto Serif', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .screening-inquiry dd a {
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1px;
+  }
+  .screening-inquiry dd a:hover {
+    color: #111;
+    border-bottom-color: #111;
+    text-decoration: none;
+  }
 </style>
