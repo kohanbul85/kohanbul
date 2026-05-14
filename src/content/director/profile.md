@@ -1,5 +1,5 @@
 ---
-name_ko: 정승민
+name_ko: 고한벌
 name_en: KO HANBUL
 birth_year_display: 1985 ~
 primary_role: 감독
