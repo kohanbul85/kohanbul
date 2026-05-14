@@ -26,7 +26,7 @@ credits:
   - role: 음악
     names:
       - 양예은
-inquiry_distributor: 대안아카이브센터 https://www.nemaf.co.kr/goods/89226
+inquiry_distributor: https://www.nemaf.co.kr/goods/89226
 inquiry_community: 고한벌  [jokoh123@naver.com]
 ---
 푸른이에게 물었다. '3학년이 돼서 좋은 점이 뭐야?' 푸른이는 내가 담임이 아닌 게 다행이라고 말했다. 그렇게 3년이 흘러갔다. 나는 그 알 수 없는 두려움을 해결하기 위해 푸른이를 다시 만나러 간다. 푸른이는 나에게 무슨 말을 할까?
