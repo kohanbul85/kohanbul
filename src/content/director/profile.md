@@ -5,7 +5,8 @@ birth_year_display: 1985 ~
 primary_role: 감독
 profile_image: /assets/profile/kohanbul_profile.jpg
 bio_en: Ko hanbul is a film director. His notable works include In the Sky Where
-  Seasons Pass (2021), Sometimes the Journey is Beautiful (2025).
+  Seasons Pass (2021), Sometimes the Journey is Beautiful (2025), and Out of the
+  Classroom(2017).
 education:
   - school: 한국교원대학교
     department: 초등교육학과 / 중등국어교육학과
