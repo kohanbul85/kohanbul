@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://jsm000.github.io',
-  base: '/kohanbul',
+  base: '/',
   integrations: [sitemap()],
   output: 'static',
 });
