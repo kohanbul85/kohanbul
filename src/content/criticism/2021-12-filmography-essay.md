@@ -1,17 +1,17 @@
 ---
-title: "고한벌 필모그래피 소론"
-author: "강민서"
-source: "문화비평"
-date: "2021-12-05"
-excerpt: "데뷔 이후 5년, 고한벌의 필모그래피는 어떤 궤적을 그리고 있는가."
+title: "[어느날 교실을 나오면서] NEMAF 카탈로그"
+author: 이수현
+source: NEMAF 2018
+date: 2018-06-15
+film: 어느날 교실을 나오면서
+excerpt: .
 ---
 
-데뷔 이후 5년, 고한벌의 필모그래피는 어떤 궤적을 그리고 있는가.
 
-초기작들은 인물 중심이었다. 카메라는 사람을 따라갔다. 그러다 중기작들에서 장소가 전면으로 나왔다. 사람보다 공간이 더 많이 말하기 시작했다. 최근작들에서는 이 두 요소가 균형을 찾아가고 있다.
+  인간관계에 있어서 우리가 당연하다고 생각하는 것들이 무엇이 있을까? 우리는 대화를 하지만 언제나 사회적 규칙이나 자신의 생각 기준에서 다른 사람을 판단하고 평가하며 소통한다. 이것이 인간관계에 있어서 당연한 것인지 의문이다. 물론 서로를 너무 배려한 나머지 어떤 문제에 봉착했을 때 그 문제가 해결이 되지 않을 수도 있겠으나 그것이 정해진 규칙이 있듯 결론 내는 것 또한 다른 문제를 야기 시킬 수 있다. 시간이 걸리더라도 서로가 후회하지 않는 삶을 선택하고 소통할 수 있어야 진정한 관계형성이자 인격 형성의 디딤돌이 될 수 있지 않을까? 영화에 나오는 푸른이와 그 외 학생들, 그리고 선생님들의 생각과 그들의 솔직한 이야기 속에서 당연하다고 생각한 것들이 갖는 문제를 이야기한다. 영화는 아이들과 선생님들의 관계를 통해 도덕적 규칙이나 삶의 원칙은 무엇인지, 공동체는 무엇인지, 그 공동체안의 한 개인은 무엇인지에 대해 생각하게 한다. (이수현)
 
-이 발전 과정은 의식적인 것인지 무의식적인 것인지 알 수 없다. 하지만 필모그래피를 통해 보면 분명한 성장의 선이 있다. 스타일이 정련되고, 관심사가 깊어진다.
 
-한 가지 변하지 않는 것이 있다. 진지함. 고한벌의 영화는 농담하지 않는다. 이것이 약점이 될 수도 있지만, 지금까지는 강점으로 작용하고 있다. 그는 자신이 보여주려는 것에 대해 진심이다. 그 진심이 관객에게 전달된다.
 
-앞으로 5년의 필모그래피가 기대된다.
+[English]
+
+  What things can be taken for granted in the human relationship? We say we have a conversation with one another, but we simultaneously evaluate others on the basis of social rules or thoughts of our own when we communicate with others. I wonder if this is natural or taken for granted in the human relationship. Without doubt, it can happen that a problem cannot be solved due to excessive thoughtfulness towards each other when they meet with the problem. However, as there are some defined rules, reaching a conclusion can also cause other problems. No matter how much time it takes, wouldn't the true relationship and character formation start with selecting a life without regret for one another and communicating with one another? The film talks about problems which are considered natural in the thoughts and frank stories of Pureuni, other students and their teachers appeared in the film. Through the relationship between students and teachers, the film makes us think of moral rules, principle of life, meaning of community and the meaning of one individual in the community. (LEE Soohyun)
