@@ -47,7 +47,7 @@ awards:
     festival: 제19회 서울국제환경영화제
     award: 한국환경영화부문 관객심사단상
     type: award
-  - year: 2023
+  - year: 2021
     festival: 제13회 DMZ국제다큐멘터리 영화제
     award: 한국경쟁 상영
 trailer_youtube_id: 193AA4PfA6Y
